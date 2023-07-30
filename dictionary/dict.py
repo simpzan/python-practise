@@ -6,9 +6,7 @@ def lookup(word):
 def main():
     argv = sys.argv
     # print(argv)
-    if len(argv) < 2: return -1
-
-    word = argv[1]
+    word = argv[1] if len(argv) >= 2 else "thinker"
     definition = lookup(word)
     print(f"The definition of '{word}':\n{definition}")
 
