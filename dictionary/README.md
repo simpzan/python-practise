@@ -12,3 +12,17 @@ the dictionary data is `dict.txt` file. Each line is a word and it's definition.
 ```
 [word || definition]
 ```
+
+## history feature
+save the dictionary lookup history to `history.txt` file. Each line is a history word/phrase lookup.
+
+For example, after the first lookup `link`, the history file should be
+```
+link
+```
+Then after lookup `think`, the file should be
+```
+link
+think
+```
+
