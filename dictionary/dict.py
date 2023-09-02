@@ -1,6 +1,6 @@
 import sys
 
-def lookup2(word):
+def lookup(word):
     file = open('dict.txt')
     prefix = f'[{word} || '
     result = None
@@ -28,7 +28,7 @@ def main():
     argv = sys.argv
     # print(argv)
     word = argv[1] if len(argv) >= 2 else "thinker"
-    definition = lookup2(word)
+    definition = lookup(word)
     definition = definition.replace('\\n', '\n')
     print(f"The definition of '{word}':\n{definition}")
     writing(word)
