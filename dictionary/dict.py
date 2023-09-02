@@ -12,24 +12,6 @@ def lookup2(word):
     if result is None: return ''
     return result[len(prefix):-2]
 
-def lookup(word):
-    s='0'
-    z=open('dict.txt')
-    for a in z:
-        a=a.strip()
-        if a.startswith('[' + word + ' |'):
-            s=a
-            break
-    if s=='0':
-        return "aabb"
-    else:
-         q=2
-         for w in s:
-             if w=="|":
-                 break
-             else: q+=1
-         return s[q:-1]
-
 def writing(word):
     x=0
     file2=open('history.txt','a+')
