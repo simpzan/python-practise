@@ -12,25 +12,36 @@ def lookup(word):
     if result is None: return ''
     return result[len(prefix):-2]
 
-def writing(word):
-    x=0
-    file2=open('history.txt','a+')
-    for line in file2:
-        print(f"line {line}")
-        if x==0:#len(line)-1==len(word): #and line[len(line)-1]==word:
-            x=1
-            break
-    if x==0:
-         file2.write(word+'\n')
-    file2.close
+def dictmake():
+    a=dict()
+    file=open('dict.txt','r')
+    for line in file:
+        z=line.find('|')
+        a[line[1:z-1]]=line[z+4:-2]
+    file.close()
+    return a
 
+def writing(word):
+    a=None                            
+    file=open('history.txt','r+')
+    for line in file:        
+         if line[:-1]==word:
+             a=1            
+             break         
+    if a is None:          
+       file.write(word+'\n')
+    file.close()
+   
 def main():
     argv = sys.argv
     # print(argv)
-    word = argv[1] if len(argv) >= 2 else "thinker"
-    definition = lookup(word)
-    definition = definition.replace('\\n', '\n')
-    print(f"The definition of '{word}':\n{definition}")
-    writing(word)
+    a=dictmake()
+    for i in range(len(argv)-1):
+        word=argv[1+i]
+        if word in a:
+           definition=a[word]
+           print(f"The definition of '{word}':\n{definition}\n")
+           writing(word)
+   
 
 main()
