@@ -1,20 +1,9 @@
 import sys
-
-def lookup(word):
-    file = open('dict.txt')
-    prefix = f'[{word} || '
-    result = None
-    for line in file:
-        if line.startswith(prefix):
-            result = line
-            break
-    file.close()
-    if result is None: return ''
-    return result[len(prefix):-2]
+import json
 
 def dictmake():
     a=dict()
-    file=open('dict.txt','r')
+    file=open('dictionary/dict.txt','r')
     for line in file:
         z=line.find('|')
         a[line[1:z-1]]=line[z+4:-2]
@@ -22,16 +11,14 @@ def dictmake():
     return a
 
 def writing(word):
-    a=None                            
-    file=open('history.txt','r+')
-    for line in file:        
-         if line[:-1]==word:
-             a=1            
-             break         
-    if a is None:          
-       file.write(word+'\n')
-    file.close()
-   
+    with open('history.json','r') as file:
+        data=json.load(file)
+    if word not in data['history']:
+        data['history']+=[word]
+        with open('history.json','w') as file:
+            json.dump(data,file,indent=4)
+            
+
 def main():
     argv = sys.argv
     # print(argv)
